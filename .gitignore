@@ -1,4 +1,3 @@
-dataset/CalCOFI
-dataset/bottle.csv
-dataset/cast.csv
+dataset/CalCOFI/bottle.csv
+dataset/CalCOFI/cast.csv
 .venv
