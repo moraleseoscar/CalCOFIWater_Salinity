@@ -1,16 +1,11 @@
 
-
-import numpy as np
 import pandas as pd 
-import matplotlib.pyplot as plt
 from sklearn.pipeline import Pipeline
-from sklearn.model_selection import train_test_split, cross_val_score, cross_val_predict
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
 from sklearn.neural_network import MLPRegressor
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GridSearchCV
-import os
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, r2_score
 
 
 # Load the data
@@ -49,5 +44,16 @@ grid_search = GridSearchCV(pipeline, options_grid, cv=5, n_jobs=-1)
 # Fit the grid search
 grid_search.fit(X_train, y_train)
 
+# Print the best parameters
 print(grid_search.best_params_)
 
+# Predict on the test set
+y_pred = grid_search.predict(X_test)
+
+# Calculate the mean squared error
+new_mse = mean_squared_error(y_test, y_pred)
+print(f'Mean Squared Error: {new_mse}')
+
+# Calculate the R-squared value
+new_r2 = r2_score(y_test, y_pred)
+print(f'R-squared: {new_r2}')
