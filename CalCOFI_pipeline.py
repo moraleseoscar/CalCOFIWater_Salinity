@@ -32,10 +32,11 @@ pipeline = Pipeline([
 ])
 
 # Establishing a grid of hyperparameters to test
+
 options_grid = {
-    'hidden_layer_sizes': [(100, 50), (50, 50), (50, 100, 50)],
-    'activation': ['tanh', 'relu'],
-    'alpha': [0.0001, 0.05, 0.000001]
+    'mlp__hidden_layer_sizes': [(100, 50), (50, 50), (50, 100, 50)],
+    'mlp__activation': ['tanh', 'relu'],
+    'mlp__alpha': [0.0001, 0.05, 0.000001]
 }
 
 # Perform a grid search with the options in options_grid
@@ -49,6 +50,14 @@ print(grid_search.best_params_)
 
 # Predict on the test set
 y_pred = grid_search.predict(X_test)
+
+# Save the predicted values to a new df
+results = pd.DataFrame({
+		'Actual': y_test,
+		'Predicted': y_pred
+})
+# Save the results to a csv file
+results.to_csv('project/output/predictions.csv', index=False)
 
 # Calculate the mean squared error
 new_mse = mean_squared_error(y_test, y_pred)

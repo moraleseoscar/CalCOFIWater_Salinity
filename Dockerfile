@@ -6,8 +6,6 @@ COPY . /app
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-EXPOSE 80
 
-ENV NAME World
 
-CMD ["python", "script.py"]
+CMD ["python", "CalCOFI_pipeline.py"]
