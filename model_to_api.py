@@ -46,7 +46,8 @@ def predict():
 		}
 		X_predict = pd.DataFrame(data)
 		y_predict = pipeline.predict(X_predict)
+		print("Predicted: ", y_predict)
 		return flask.jsonify(y_predict.tolist())
 
 if __name__ == '__main__':
-	app.run(port=5000, debug=True)
+	app.run(host='0.0.0.0', port=5000)
