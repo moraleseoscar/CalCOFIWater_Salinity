@@ -6,6 +6,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
+import flask
 
 
 # Load the data
@@ -66,3 +67,16 @@ print(f'Mean Squared Error: {new_mse}')
 # Calculate the R-squared value
 new_r2 = r2_score(y_test, y_pred)
 print(f'R-squared: {new_r2}')
+
+# Save the model
+import joblib
+joblib.dump(grid_search, 'project/output/model.pkl')
+
+# Expose the model as a REST API
+app = flask.Flask(__name__)
+
+@app.route('/predict', methods=['POST'])
+def predict():
+		data = flask.request.json
+		prediction = grid_search.predict(data)
+		return flask.jsonify({'prediction': list(prediction)})
