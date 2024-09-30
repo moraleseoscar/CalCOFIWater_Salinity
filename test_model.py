@@ -18,6 +18,8 @@ class TestModelPrediction(unittest.TestCase):
         # Make prediction
         y_pred = model.predict(X_test)
         # Check if the prediction is close to the true value
+        print("Prediction: ", y_pred)
+        print("True value: ", y_true)
         np.testing.assert_allclose(y_pred, y_true, rtol=0.1)
 
 if __name__ == '__main__':
